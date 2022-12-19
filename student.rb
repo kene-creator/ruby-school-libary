@@ -2,11 +2,11 @@ require './person'
 
 class Student < Person
   def initialize(age, name, classroom)
-      super(age, name)
-      @classroom = classroom
+    super(age, name)
+    @classroom = classroom
   end
 
   def play_hooky
-     '¯\(ツ)/¯'
+    '¯\(ツ)/¯'
   end
 end
