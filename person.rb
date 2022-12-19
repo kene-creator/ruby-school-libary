@@ -6,9 +6,10 @@ class Person
     @parent_permission = parent_permission
   end
 
-  attr_reader :name, :id, :age
+  attr_reader :id
+  attr_accessor :name, :age
 
-  def is_of_age? # rubocop:todo Naming/PredicateName
+  private_class_method def is_of_age? # rubocop:todo Naming/PredicateName
     return true if @age >= 18
 
     false
