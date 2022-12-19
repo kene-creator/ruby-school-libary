@@ -13,12 +13,6 @@ class Person < Nameable
   attr_reader :id
   attr_accessor :name, :age
 
-  private def is_of_age? # rubocop:todo Naming/PredicateName
-    return true if @age >= 18
-
-    false
-  end
-
   def can_use_service?
     is_of_age? || @parent_permission
   end
@@ -26,11 +20,19 @@ class Person < Nameable
   def correct_name
     @name
   end
+
+  private
+
+  def is_of_age? # rubocop:todo Naming/PredicateName
+    return true if @age >= 18
+
+    false
+  end
 end
 
-person = Person.new('maximilianus',22)
-print person.correct_name
-capitalizedPerson = CapitalizeDecorator.new(person)
-print capitalizedPerson.correct_name
-capitalizedTrimmedPerson = TrimmerDecorator.new(capitalizedPerson)
-print capitalizedTrimmedPerson.correct_name
+person = Person.new('maximilianus', 22)
+puts person.correct_name
+capitalized_person = CapitalizeDecorator.new(person)
+puts capitalized_person.correct_name
+capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
+puts capitalized_trimmed_person.correct_name
