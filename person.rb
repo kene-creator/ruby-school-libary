@@ -4,6 +4,7 @@ require './trimmer_decorator'
 
 class Person < Nameable
   def initialize(name = 'unknown', age, parent_permission: true) # rubocop:todo Style/OptionalArguments
+    super()
     @id = Random.rand(1..100)
     @name = name
     @age = age
