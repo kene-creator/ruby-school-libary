@@ -31,17 +31,3 @@ class Person
         is_of_age? || @parent_permission
     end
 end
-
-class Student < Person
-
-    def initialize(name, age, parent_permission: true, classroom)
-        super(name, age, parent_permission: parent_permission)
-    
-        self.classroom = (classroom)
-    end
-
-    def play_hooky
-        '¯\(ツ)/¯'
-      end
-
-end
