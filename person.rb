@@ -24,7 +24,7 @@ class Person < Nameable
   end
 
   def add_rental(rental)
-    @rental << rental
+    @rentals << rental
   end
 
   private
