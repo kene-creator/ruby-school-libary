@@ -1,9 +1,14 @@
 require './nameable'
-require './capitalize_decorator'
-require './trimmer_decorator'
+require './rental'
+require './decorator'
+require './trim_decorator'
+require 'date'
 
 class Person < Nameable
-  def initialize(name = 'unknown', age, parent_permission: true) # rubocop:todo Style/OptionalArguments
+  attr_reader :id, :rentals
+  attr_accessor :age, :name
+
+  def initialize(age, name = 'unknown', parent_permission: true)
     super()
     @id = Random.rand(1..100)
     @name = name
@@ -12,33 +17,21 @@ class Person < Nameable
     @rentals = []
   end
 
-  attr_reader :id
-  attr_accessor :name, :age
-
-  def can_use_service?
-    is_of_age? || @parent_permission
+  def add_rental(book, _date)
+    Rental.new(person: self, book: book)
   end
 
   def correct_name
     @name
   end
 
-  def add_rental(rental)
-    @rentals << rental
+  def can_use_service?
+    of_age? || @parent_permission
   end
 
   private
 
-  def is_of_age? # rubocop:todo Naming/PredicateName
-    return true if @age >= 18
-
-    false
+  def of_age?
+    @age >= 18
   end
 end
-
-person = Person.new('maximilianus', 22)
-puts person.correct_name
-capitalized_person = CapitalizeDecorator.new(person)
-puts capitalized_person.correct_name
-capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
-puts capitalized_trimmed_person.correct_name
