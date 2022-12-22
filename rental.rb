@@ -6,7 +6,7 @@ class Rental
   def initialize(person, book)
     @date = DateTime.now.strftime('%Y/%m/%d %H:%M')
 
-    @book.rentals << self
+    @person.rentals << self
 
     @person = person
 
