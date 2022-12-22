@@ -1,17 +1,17 @@
 require './student'
 require './teacher'
 require './book'
-require './rental'
-
+require './classroom'
 
 class App
-  attr_reader :books, :students, :teachers
+  attr_reader :books, :classrooms, :students, :teachers
 
   def initialize
     @students = []
     @books = []
     @teachers = []
     @rentals = []
+    @classrooms = []
   end
 
   def list_people
@@ -21,6 +21,10 @@ class App
 
   def list_books
     @books.each { |b| puts "[Book] Title: #{b.title}, Author: #{b.author}" }
+  end
+
+  def list_classrooms
+    @classrooms.each { |c| puts "[Classroom] Label: #{c.label}" }
   end
 
   def create_student(age, name, classroom)
@@ -45,6 +49,12 @@ class App
     rental = Rental.new(person: person, book: book)
     @rentals << rental
     rental
+  end
+
+  def create_classroom(label)
+    classroom = Classroom.new(label: label)
+    @classrooms << classroom
+    classroom
   end
 
   def find_rentals_by_person(person_id)
