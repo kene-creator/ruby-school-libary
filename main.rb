@@ -14,7 +14,7 @@ def main
       puts 'App is closing...'
       break
     else
-      puts 'INVALID OPTION'
+      puts 'INVALID OPTION!'
     end
     factory.separator
   end
