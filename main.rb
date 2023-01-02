@@ -1,6 +1,6 @@
 require './factory'
 
-# main entry to the CLI 
+# main entry to the CLI
 
 def main
   factory = Factory.new
