@@ -49,5 +49,5 @@ Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
   Enabled: false
-  Style/ZeroLengthPredicate:
+Style/ZeroLengthPredicate:
   Enabled: false
