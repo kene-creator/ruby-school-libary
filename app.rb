@@ -5,7 +5,7 @@ require './classroom'
 require 'json'
 
 class App
-  attr_reader :books, :classrooms, :students, :teachers
+  attr_accessor :books, :classrooms, :students, :teachers
 
   def initialize
     @students = []
@@ -19,12 +19,12 @@ class App
     student_file = File.open('./data/student.json')
     student_file_data = student_file.read
     student_data = JSON.parse(student_file_data)
-    @students << student_data
+    @students.concat(student_data)
 
     teacher_file = File.open('./data/teacher.json')
     teacher_file_data = teacher_file.read
     teacher_data = JSON.parse(teacher_file_data)
-    @teachers << teacher_data
+    @teachers.concat(teacher_data)
 
     teacher_data.each { |hash| puts "[TEACHER] Name: #{hash['name']} | Age: #{hash['age']}" }
     student_data.each { |hash| puts "[STUDENT] Name: #{hash['name']} | Age: #{hash['age']}" }
@@ -43,6 +43,7 @@ class App
     file = File.open('./data/classroom.json')
     file_data = file.read
     data = JSON.parse(file_data)
+    @classroom.concat(data)
     return unless data
 
     data.each { |hash| puts "[CLASSROOM] Label: #{hash['classroom']['label']}" }

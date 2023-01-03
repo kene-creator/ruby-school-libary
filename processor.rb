@@ -69,7 +69,6 @@ class CreateProcessor < Processor
   end
 
   def create_student(age, name)
-    puts 'Available Classrooms'
     puts '0. Create new'
     @app.classrooms.each_with_index { |c, i| puts "#{i + 1}. #{c.label}" }
     choice = prompt(suffix: 'classroom: ')
