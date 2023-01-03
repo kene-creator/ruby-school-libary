@@ -16,40 +16,36 @@ class App
   end
 
   def list_people
-    student_file = File.open("./data/student.json")
+    student_file = File.open('./data/student.json')
     student_file_data = student_file.read
     student_data = JSON.parse(student_file_data)
     @students << student_data
-   
 
-    teacher_file = File.open("./data/teacher.json")
+    teacher_file = File.open('./data/teacher.json')
     teacher_file_data = teacher_file.read
     teacher_data = JSON.parse(teacher_file_data)
     @teachers << teacher_data
 
-    
-    teacher_data.each {|hash| puts "[TEACHER] Name: #{hash["name"]} | Age: #{hash["age"]}"}
-    student_data.each {|hash| puts "[STUDENT] Name: #{hash["name"]} | Age: #{hash["age"]}"}
+    teacher_data.each { |hash| puts "[TEACHER] Name: #{hash['name']} | Age: #{hash['age']}" }
+    student_data.each { |hash| puts "[STUDENT] Name: #{hash['name']} | Age: #{hash['age']}" }
   end
 
   def list_books
-    file = File.open("./data/book.json")
+    file = File.open('./data/book.json')
     file_data = file.read
     data = JSON.parse(file_data)
-    if !data 
-      return
-    end
-    data.each {|hash| puts "[BOOK] Title: #{hash["title"]} | Author: #{hash["author"]}"}
+    return unless data
+
+    data.each { |hash| puts "[BOOK] Title: #{hash['title']} | Author: #{hash['author']}" }
   end
 
   def list_classrooms
-    file = File.open("./data/classroom.json")
+    file = File.open('./data/classroom.json')
     file_data = file.read
     data = JSON.parse(file_data)
-    if !data 
-      return
-    end
-    data.each {|hash| puts "[CLASSROOM] Label: #{hash["classroom"]["label"]}"}
+    return unless data
+
+    data.each { |hash| puts "[CLASSROOM] Label: #{hash['classroom']['label']}" }
   end
 
   def create_student(age, name, classroom)

@@ -45,29 +45,21 @@ class CreateProcessor < Processor
     equipped
   end
 
-  def list_people_with_index
-    si = @app.students.size
-    @app.students.each_with_index { |s, i| puts "#{i + 1}. #{s.name}" }
-    @app.teachers.each_with_index { |t, i| puts "#{i + si + 1}. #{t.name}" }
-  end
-
   def create_teacher(age, name)
     specialization = nil_prompt('specialization: ', :str)
     return if specialization.nil?
 
     teacher = @app.create_teacher(age, name, specialization)
     if File.exist?('./data/teacher.json')
-      data = { "name" => teacher.name, "age" => teacher.age}
-      json_data = data
+      data = { 'name' => teacher.name, 'age' => teacher.age }
       file = File.open('./data/teacher.json')
-        if file.size.zero?
-          teacher_d = [json_data]
-        else
+      if file.size.zero?
+        teacher_d = [data]
+      else
         teacher_d = JSON.parse(File.read('./data/teacher.json'))
-        teacher_d << json_data
-        end
+        teacher_d << data
+      end
       file.close
-
       addfile = File.open('./data/teacher.json', 'w')
       addfile.write(JSON.generate(teacher_d))
       addfile.close
@@ -81,31 +73,23 @@ class CreateProcessor < Processor
     puts '0. Create new'
     @app.classrooms.each_with_index { |c, i| puts "#{i + 1}. #{c.label}" }
     choice = prompt(suffix: 'classroom: ')
-    return if reject_choice?(choice, min: 0, max: @app.classrooms.size)
-
-    # noinspection RubyNilAnalysis
     classroom = choice.zero? ? create_classroom : @app.classrooms[choice - 1]
-    return if classroom.nil?
-
     student = @app.create_student(age, name, classroom)
     if File.exist?('./data/student.json')
-      data = { "name" => student.name, "age" => student.age }
-      json_data = data
-      file =File.open('./data/student.json')
-        if file.size.zero?
-          student_d = [json_data]
-        else
+      data = { 'name' => student.name, 'age' => student.age }
+      file = File.open('./data/student.json')
+      if file.size.zero?
+        student_d = [data]
+      else
         student_d = JSON.parse(File.read('./data/student.json'))
-        student_d << json_data
-        end
+        student_d << data
+      end
       file.close
-
       addfile = File.open('./data/student.json', 'w')
       addfile.write(JSON.generate(student_d))
       addfile.close
     end
     puts 'Student created successfully!'
-    student
   end
 
   def create_person
@@ -129,17 +113,15 @@ class CreateProcessor < Processor
 
     classroom = @app.create_classroom(label)
     if File.exist?('./data/classroom.json')
-      data = {"classroom" => classroom.label }
-      json_data = data
-      file =File.open('./data/classroom.json')
-        if file.size.zero?
-          classroom_d = [json_data]
-        else
+      data = { 'classroom' => classroom.label }
+      file = File.open('./data/classroom.json')
+      if file.size.zero?
+        classroom_d = [data]
+      else
         classroom_d = JSON.parse(File.read('./data/classroom.json'))
-        classroom_d << json_data
-        end
+        classroom_d << data
+      end
       file.close
-
       addfile = File.open('./data/classroom.json', 'w')
       addfile.write(JSON.generate(classroom_d))
       addfile.close
@@ -157,59 +139,45 @@ class CreateProcessor < Processor
 
     book = @app.create_book(title, author)
     if File.exist?('./data/book.json')
-      data = { "title" => book.title, "author" => book.author}
-      json_data = data
+      data = { 'title' => book.title, 'author' => book.author }
       file = File.open('./data/book.json')
-        if file.size.zero?
-          book_d = [json_data]
-        else
-          book_d = JSON.parse(File.read('./data/book.json'))
-        book_d << json_data
-        end
+      if file.size.zero?
+        book_d = [data]
+      else
+        book_d = JSON.parse(File.read('./data/book.json'))
+        book_d << data
+      end
       file.close
-
       addfile = File.open('./data/book.json', 'w')
       addfile.write(JSON.generate(book_d))
       addfile.close
     end
     puts 'Book created successfully!'
-    book
   end
 
   def create_rental
     return unless resources?
 
     puts "Who's borrowing?"
-    list_people_with_index
     pc = prompt(suffix: 'person: ')
-    ss = @app.students.size
-    return if reject_choice?(pc, max: ss + @app.teachers.size)
-
-    puts 'Which book?'
-    @app.books.each_with_index { |b, i| puts "#{i + 1}. #{b.title}" }
-    bc = prompt(suffix: 'book: ')
-    return if reject_choice?(bc, max: @app.books.size)
 
     person = pc > ss ? @app.teachers[pc - ss - 1] : @app.students[pc - 1]
     rental = @app.create_rental(person, @app.books[bc - 1])
     if File.exist?('./data/rental.json')
-      data = { "person" => rental.person}
-      json_data = data
-      file =File.open('./data/rental.json')
-        if file
-          rental = [json_data]
-        else
+      data = { 'person' => rental.person }
+      file = File.open('./data/rental.json')
+      if file
+        rental = [data]
+      else
         rental = JSON.parse(File.read('./data/rental.json'))
-        rental << json_data
-        end
+        rental << data
+      end
       file.close
-
       addfile = File.open('./data/rental.json', 'w')
       addfile.write(JSON.generate(rental))
       addfile.close
     end
     puts 'Rental created successfully!'
-    rental
   end
 end
 
