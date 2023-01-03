@@ -53,7 +53,7 @@ class CreateProcessor < Processor
     if File.exist?('./data/teacher.json')
       data = { 'name' => teacher.name, 'age' => teacher.age }
       file = File.open('./data/teacher.json')
-      if file.size == 0
+      if file.size.zero?
         teacher_d = [data]
       else
         teacher_d = JSON.parse(File.read('./data/teacher.json'))
@@ -77,7 +77,7 @@ class CreateProcessor < Processor
     if File.exist?('./data/student.json')
       data = { 'name' => student.name, 'age' => student.age }
       file = File.open('./data/student.json')
-      if file.size == 0
+      if file.size.zero?
         student_d = [data]
       else
         student_d = JSON.parse(File.read('./data/student.json'))
@@ -114,7 +114,7 @@ class CreateProcessor < Processor
     if File.exist?('./data/classroom.json')
       data = { 'classroom' => classroom.label }
       file = File.open('./data/classroom.json')
-      if file.size == 0
+      if file.size.zero?
         classroom_d = [data]
       else
         classroom_d = JSON.parse(File.read('./data/classroom.json'))
@@ -140,7 +140,7 @@ class CreateProcessor < Processor
     if File.exist?('./data/book.json')
       data = { 'title' => book.title, 'author' => book.author }
       file = File.open('./data/book.json')
-      if file.size == 0
+      if file.size.zero?
         book_d = [data]
       else
         book_d = JSON.parse(File.read('./data/book.json'))
