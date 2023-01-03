@@ -33,7 +33,14 @@ class App
   end
 
   def list_classrooms
-    @classrooms.each { |c| puts "[Classroom] Label: #{c.label}" }
+    file = File.open("classroom.json")
+    file_data = file.read
+    data = JSON.parse(file_data)
+    if !file_data 
+      return
+    end
+    label = data['classroom']['label']
+    puts "[Classroom] Label: #{label}"
   end
 
   def create_student(age, name, classroom)

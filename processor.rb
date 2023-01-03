@@ -104,7 +104,7 @@ class CreateProcessor < Processor
     classroom = @app.create_classroom(label)
     data = {"classroom" => classroom.label }
     json_data = data.to_json
-    File.open("student.json", "a") { |f| f.write "#{json_data}\n" }
+    File.open("classroom.json", "a") { |f| f.write "#{json_data}\n" }
     puts 'Classroom created successfully!'
     classroom
   end
