@@ -57,8 +57,8 @@ class CreateProcessor < Processor
 
     teacher = @app.create_teacher(age, name, specialization)
     if File.exist?('./data/teacher.json')
-      data = { "name" => teacher.name, "age" => teacher.age, "specialization" => teacher.specialization }
-      json_data = data.to_json
+      data = { "name" => teacher.name, "age" => teacher.age}
+      json_data = data
       file = File.open('./data/teacher.json')
         if file.size.zero?
           teacher_d = [json_data]
@@ -196,7 +196,7 @@ class CreateProcessor < Processor
       data = { "person" => rental.person}
       json_data = data
       file =File.open('./data/rental.json')
-        if file.size.zero?
+        if file
           rental = [json_data]
         else
         rental = JSON.parse(File.read('./data/rental.json'))
