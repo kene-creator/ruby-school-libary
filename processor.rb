@@ -56,9 +56,22 @@ class CreateProcessor < Processor
     return if specialization.nil?
 
     teacher = @app.create_teacher(age, name, specialization)
-    data = { "name" => teacher.name, "age" => teacher.age, "specialization" => teacher.specialization }
-    json_data = data.to_json
-    File.open("student.json", "a") { |f| f.write "#{json_data}\n" }
+    if File.exist?('./data/teacher.json')
+      data = { "name" => teacher.name, "age" => teacher.age, "specialization" => teacher.specialization }
+      json_data = data.to_json
+      file = File.open('./data/teacher.json')
+        if file.size.zero?
+          teacher_d = [json_data]
+        else
+        teacher_d = JSON.parse(File.read('./data/teacher.json'))
+        teacher_d << json_data
+        end
+      file.close
+
+      addfile = File.open('./data/teacher.json', 'w')
+      addfile.write(JSON.generate(teacher_d))
+      addfile.close
+    end
     puts 'Teacher created successfully!'
     teacher
   end
@@ -75,9 +88,22 @@ class CreateProcessor < Processor
     return if classroom.nil?
 
     student = @app.create_student(age, name, classroom)
-    data = { "name" => student.name, "age" => student.age, "classroom" => student.classroom }
-    json_data = data.to_json
-    File.open("student.json", "w") { |f| f.write "#{json_data}\n" }
+    if File.exist?('./data/student.json')
+      data = { "name" => student.name, "age" => student.age }
+      json_data = data
+      file =File.open('./data/student.json')
+        if file.size.zero?
+          student_d = [json_data]
+        else
+        student_d = JSON.parse(File.read('./data/student.json'))
+        student_d << json_data
+        end
+      file.close
+
+      addfile = File.open('./data/student.json', 'w')
+      addfile.write(JSON.generate(student_d))
+      addfile.close
+    end
     puts 'Student created successfully!'
     student
   end
@@ -102,9 +128,22 @@ class CreateProcessor < Processor
     return if label.nil?
 
     classroom = @app.create_classroom(label)
-    data = {"classroom" => classroom.label }
-    json_data = data.to_json
-    File.open("classroom.json", "a") { |f| f.write "#{json_data}\n" }
+    if File.exist?('./data/classroom.json')
+      data = {"classroom" => classroom.label }
+      json_data = data
+      file =File.open('./data/classroom.json')
+        if file.size.zero?
+          classroom_d = [json_data]
+        else
+        classroom_d = JSON.parse(File.read('./data/classroom.json'))
+        classroom_d << json_data
+        end
+      file.close
+
+      addfile = File.open('./data/classroom.json', 'w')
+      addfile.write(JSON.generate(classroom_d))
+      addfile.close
+    end
     puts 'Classroom created successfully!'
     classroom
   end
@@ -117,9 +156,22 @@ class CreateProcessor < Processor
     return if author.nil?
 
     book = @app.create_book(title, author)
-    data = { "title" => book.title, "author" => book.author}
-    json_data = data.to_json
-    File.open("book.json", "w") { |f| f.write "#{json_data}\n" }
+    if File.exist?('./data/book.json')
+      data = { "title" => book.title, "author" => book.author}
+      json_data = data
+      file = File.open('./data/book.json')
+        if file.size.zero?
+          book_d = [json_data]
+        else
+          book_d = JSON.parse(File.read('./data/book.json'))
+        book_d << json_data
+        end
+      file.close
+
+      addfile = File.open('./data/book.json', 'w')
+      addfile.write(JSON.generate(book_d))
+      addfile.close
+    end
     puts 'Book created successfully!'
     book
   end
@@ -140,9 +192,22 @@ class CreateProcessor < Processor
 
     person = pc > ss ? @app.teachers[pc - ss - 1] : @app.students[pc - 1]
     rental = @app.create_rental(person, @app.books[bc - 1])
-    data = { "person" => rental.person}
-    json_data = data.to_json
-    File.open("rental.json", "w") { |f| f.write "#{json_data}\n" }
+    if File.exist?('./data/rental.json')
+      data = { "person" => rental.person}
+      json_data = data
+      file =File.open('./data/rental.json')
+        if file.size.zero?
+          rental = [json_data]
+        else
+        rental = JSON.parse(File.read('./data/rental.json'))
+        rental << json_data
+        end
+      file.close
+
+      addfile = File.open('./data/rental.json', 'w')
+      addfile.write(JSON.generate(rental))
+      addfile.close
+    end
     puts 'Rental created successfully!'
     rental
   end

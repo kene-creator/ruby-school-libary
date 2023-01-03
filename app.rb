@@ -16,8 +16,16 @@ class App
   end
 
   def list_people
-    @students.each { |s| puts "[Student] ID: #{s.id}, Name: #{s.name}" }
-    @teachers.each { |t| puts "[Teacher] ID: #{t.id}, Name: #{t.name}" }
+    student_file = File.open("book.json")
+    student_file_data = file.read
+    student_data = JSON.parse(student_file_data)
+    if !student_file_data 
+      return
+    end
+    student_name = student_data['name']
+    student_age = student_data['age']
+    puts "[Student] Name: #{student_name}, Age: #{student_age}"
+    puts "[Teacher] ID: #{t.id}, Name: #{t.name}"
   end
 
   def list_books
@@ -33,9 +41,10 @@ class App
   end
 
   def list_classrooms
-    file = File.open("classroom.json")
+    file = File.open("./data/classroom.json")
     file_data = file.read
     data = JSON.parse(file_data)
+    print data
     if !file_data 
       return
     end
