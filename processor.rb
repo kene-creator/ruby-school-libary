@@ -1,4 +1,5 @@
 require './user_prompt'
+require 'json'
 
 class Processor < UserPrompt
   def initialize(app)
@@ -71,6 +72,9 @@ class CreateProcessor < Processor
     return if classroom.nil?
 
     student = @app.create_student(age, name, classroom)
+    data = { "name" => student.name, "age" => student.age, "classroom" => student.classroom }
+    json_data = data.to_json
+    File.open("student.json", "a") { |f| f.write "#{json_data}" }
     puts 'Student created successfully!'
     student
   end
