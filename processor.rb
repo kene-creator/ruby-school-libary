@@ -56,6 +56,9 @@ class CreateProcessor < Processor
     return if specialization.nil?
 
     teacher = @app.create_teacher(age, name, specialization)
+    data = { "name" => teacher.name, "age" => teacher.age, "specialization" => teacher.specialization }
+    json_data = data.to_json
+    File.open("student.json", "a") { |f| f.write "#{json_data}\n" }
     puts 'Teacher created successfully!'
     teacher
   end
@@ -74,7 +77,7 @@ class CreateProcessor < Processor
     student = @app.create_student(age, name, classroom)
     data = { "name" => student.name, "age" => student.age, "classroom" => student.classroom }
     json_data = data.to_json
-    File.open("student.json", "a") { |f| f.write "#{json_data}" }
+    File.open("student.json", "w") { |f| f.write "#{json_data}\n" }
     puts 'Student created successfully!'
     student
   end
@@ -99,6 +102,9 @@ class CreateProcessor < Processor
     return if label.nil?
 
     classroom = @app.create_classroom(label)
+    data = {"classroom" => classroom.label }
+    json_data = data.to_json
+    File.open("student.json", "a") { |f| f.write "#{json_data}\n" }
     puts 'Classroom created successfully!'
     classroom
   end
@@ -111,6 +117,9 @@ class CreateProcessor < Processor
     return if author.nil?
 
     book = @app.create_book(title, author)
+    data = { "title" => book.title, "author" => book.author}
+    json_data = data.to_json
+    File.open("book.json", "w") { |f| f.write "#{json_data}\n" }
     puts 'Book created successfully!'
     book
   end
@@ -131,6 +140,9 @@ class CreateProcessor < Processor
 
     person = pc > ss ? @app.teachers[pc - ss - 1] : @app.students[pc - 1]
     rental = @app.create_rental(person, @app.books[bc - 1])
+    data = { "person" => rental.person}
+    json_data = data.to_json
+    File.open("rental.json", "w") { |f| f.write "#{json_data}\n" }
     puts 'Rental created successfully!'
     rental
   end

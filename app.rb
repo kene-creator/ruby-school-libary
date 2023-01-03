@@ -2,6 +2,7 @@ require './student'
 require './teacher'
 require './book'
 require './classroom'
+require 'json'
 
 class App
   attr_reader :books, :classrooms, :students, :teachers
@@ -20,7 +21,15 @@ class App
   end
 
   def list_books
-    @books.each { |b| puts "[Book] Title: #{b.title}, Author: #{b.author}" }
+    file = File.open("book.json")
+    file_data = file.read
+    data = JSON.parse(file_data)
+    if !file_data 
+      return
+    end
+    title = data['title']
+    author = data['author']
+   puts "[Book] Title: #{title}, Author: #{author}"
   end
 
   def list_classrooms
