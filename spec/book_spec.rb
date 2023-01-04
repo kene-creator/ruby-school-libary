@@ -1,5 +1,6 @@
 require './book'
 
+# Test on Book Class
 describe Book do
   describe '#initialize' do
     it 'sets the title and author attributes' do

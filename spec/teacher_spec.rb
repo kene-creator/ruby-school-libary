@@ -1,5 +1,6 @@
 require './teacher'
 
+# Test Teacher class
 describe Teacher do
   let(:teacher) { Teacher.new(30, 'Jane Smith', 'Math') }
 

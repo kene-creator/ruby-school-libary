@@ -1,5 +1,6 @@
 require './student'
 
+# Test on Student Class
 describe Student do
   let(:classroom) { double('classroom') }
   let(:student) { Student.new(18, 'John Smith', classroom) }

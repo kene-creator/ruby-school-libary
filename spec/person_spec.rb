@@ -1,5 +1,6 @@
 require './person'
 
+# Test on Person Class
 describe Person do
   let(:person) { Person.new(25, 'John Smith') }
 
