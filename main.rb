@@ -1,4 +1,5 @@
 require './factory'
+require 'json'
 
 # main entry to the CLI
 

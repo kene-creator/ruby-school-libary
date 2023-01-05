@@ -2,9 +2,10 @@ require './student'
 require './teacher'
 require './book'
 require './classroom'
+require 'json'
 
 class App
-  attr_reader :books, :classrooms, :students, :teachers
+  attr_accessor :books, :classrooms, :students, :teachers
 
   def initialize
     @students = []
@@ -15,16 +16,37 @@ class App
   end
 
   def list_people
-    @students.each { |s| puts "[Student] ID: #{s.id}, Name: #{s.name}" }
-    @teachers.each { |t| puts "[Teacher] ID: #{t.id}, Name: #{t.name}" }
+    student_file = File.open('./data/student.json')
+    student_file_data = student_file.read
+    student_data = JSON.parse(student_file_data)
+    @students.concat(student_data)
+
+    teacher_file = File.open('./data/teacher.json')
+    teacher_file_data = teacher_file.read
+    teacher_data = JSON.parse(teacher_file_data)
+    @teachers.concat(teacher_data)
+
+    teacher_data.each { |hash| puts "[TEACHER] Name: #{hash['name']} | Age: #{hash['age']}" }
+    student_data.each { |hash| puts "[STUDENT] Name: #{hash['name']} | Age: #{hash['age']}" }
   end
 
   def list_books
-    @books.each { |b| puts "[Book] Title: #{b.title}, Author: #{b.author}" }
+    file = File.open('./data/book.json')
+    file_data = file.read
+    data = JSON.parse(file_data)
+    return unless data
+
+    data.each { |hash| puts "[BOOK] Title: #{hash['title']} | Author: #{hash['author']}" }
   end
 
   def list_classrooms
-    @classrooms.each { |c| puts "[Classroom] Label: #{c.label}" }
+    file = File.open('./data/classroom.json')
+    file_data = file.read
+    data = JSON.parse(file_data)
+    @classroom.concat(data)
+    return unless data
+
+    data.each { |hash| puts "[CLASSROOM] Label: #{hash['classroom']['label']}" }
   end
 
   def create_student(age, name, classroom)
