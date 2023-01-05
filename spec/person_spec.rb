@@ -1,5 +1,6 @@
 require './person'
 
+# Test on Person Class
 describe Person do
   let(:person) { Person.new(25, 'John Smith') }
 
@@ -37,6 +38,12 @@ describe Person do
       person.age = 17
       person.instance_variable_set(:@parent_permission, false)
       expect(person.can_use_service?).to eq(false)
+    end
+  end
+  describe "#add_rental" do
+    it "adds a new rental to the rentals array" do
+      rental = person.add_rental("person","book", "2022-01-01")
+      expect(person.rentals).to eq(rental)
     end
   end
 end

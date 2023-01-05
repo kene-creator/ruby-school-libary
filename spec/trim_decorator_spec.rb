@@ -1,5 +1,6 @@
 require './trim_decorator'
 
+# Test on Trimmer Decorator
 describe TrimmerDecorator do
   let(:nameable) { double('nameable') }
   let(:decorator) { TrimmerDecorator.new(nameable) }

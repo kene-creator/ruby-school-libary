@@ -1,5 +1,6 @@
 require './capitalize_decorator'
 
+# Test on Capitalize Decorator
 describe CapitalizeDecorator do
   let(:nameable) { double('nameable') }
   let(:decorator) { CapitalizeDecorator.new(nameable) }
