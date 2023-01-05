@@ -1,7 +1,6 @@
 require './person'
 
 describe Person do
-
   let(:student) { Person.new(18, 'John Smith') }
 
   describe '#initialize' do

@@ -40,9 +40,9 @@ describe Person do
       expect(person.can_use_service?).to eq(false)
     end
   end
-  describe "#add_rental" do
-    it "adds a new rental to the rentals array" do
-      rental = person.add_rental("person","book", "2022-01-01")
+  describe '#add_rental' do
+    it 'adds a new rental to the rentals array' do
+      rental = person.add_rental('person', 'book', '2022-01-01')
       expect(person.rentals).to eq(rental)
     end
   end

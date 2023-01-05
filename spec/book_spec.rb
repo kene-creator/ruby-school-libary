@@ -14,8 +14,8 @@ describe Book do
       book = Book.new(title: 'The Great Gatsby', author: 'F. Scott Fitzgerald')
       expect(book.rentals).to eq([])
     end
-    it "adds a new rental to the rentals array" do
-      rental = book.add_rental("person","book", "2022-01-01")
+    it 'adds a new rental to the rentals array' do
+      rental = book.add_rental('person', 'book', '2022-01-01')
       expect(book.rentals).to eq(rental)
     end
   end
