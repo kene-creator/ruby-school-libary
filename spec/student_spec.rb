@@ -1,8 +1,8 @@
-require './student'
+require './person'
 
-describe Student do
-  let(:classroom) { double('classroom') }
-  let(:student) { Student.new(18, 'John Smith', classroom) }
+describe Person do
+
+  let(:student) { Person.new(18, 'John Smith') }
 
   describe '#initialize' do
     it 'sets the age and name attributes' do
@@ -20,10 +20,6 @@ describe Student do
 
     it 'sets a random id attribute' do
       expect(student.id).to be_between(1, 100).inclusive
-    end
-
-    it 'sets the classroom attribute' do
-      expect(student.classroom).to eq(classroom)
     end
   end
 end
